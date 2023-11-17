@@ -1,7 +1,8 @@
-package example.validator
+package example.validator.internal
 
+import example.validator.internal.Transformations.Failure
+import example.validator.internal.{Fields, Suggestion}
 
-import example.validator.Transformations.Failure
 import scala.quoted.*
 
 object Selectors {

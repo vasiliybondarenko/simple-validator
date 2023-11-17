@@ -1,10 +1,11 @@
-package example.validator
+package example.validator.internal
 
 import cats.data.Validated.*
 import cats.data.{NonEmptyChain, Validated}
 import cats.syntax.SemigroupalOps
 import cats.syntax.all.*
 import cats.{Invariant, Semigroup, SemigroupK}
+import example.validator.*
 import example.validator.Validator.ErrorsOr
 
 import scala.collection.immutable.Seq

@@ -1,4 +1,6 @@
-package example.validator
+package example.validator.internal
+
+import example.validator.internal.Fields
 
 opaque type Suggestion = String
 object Suggestion {

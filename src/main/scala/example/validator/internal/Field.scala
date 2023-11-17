@@ -1,4 +1,4 @@
-package example.validator
+package example.validator.internal
 
 import scala.quoted.*
 

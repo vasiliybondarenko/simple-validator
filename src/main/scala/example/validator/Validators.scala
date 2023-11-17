@@ -1,12 +1,13 @@
 package example.validator
 
-import example.validator.BuilderConfigUtils.BuilderConfig
+import example.validator.internal.BuilderConfigUtils.BuilderConfig
+import example.validator.internal.{NotQuotedException, Transformations}
 
 import scala.annotation.{compileTimeOnly, implicitNotFound}
 import scala.deriving.Mirror
 
 case class ValidatorBuilder[A]() {
-  import Transformations.*
+  import example.validator.internal.Transformations.*
   inline def withValidators(inline config: BuilderConfig[A]*)(using
       product: Mirror.ProductOf[A]
   ): Validator[A] =
@@ -17,7 +18,7 @@ case class ValidatorBuilder[A]() {
 object Validators {
   def validator[A]: ValidatorBuilder[A] = ValidatorBuilder()
   @compileTimeOnly(
-    "'Field.computed' needs to be erased from the AST with a macro."
+    "'withValidator' needs to be erased from the AST with a macro."
   )
   def withValidator[Source, FieldType, ActualType](
       selector: Source => ActualType,

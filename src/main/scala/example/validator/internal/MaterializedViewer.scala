@@ -1,6 +1,7 @@
-package example.validator
+package example.validator.internal
 
-import example.validator.Transformations.Failure
+import example.validator.internal.MaterializedMirror
+import example.validator.internal.Transformations.Failure
 
 import scala.annotation.tailrec
 import scala.deriving.Mirror

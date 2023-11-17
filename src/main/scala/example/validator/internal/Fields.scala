@@ -1,4 +1,6 @@
-package example.validator
+package example.validator.internal
+
+import example.validator.internal.{Field, Fields, FunctionArguments, MaterializedMirror}
 
 import scala.deriving.Mirror
 import scala.quoted.*
