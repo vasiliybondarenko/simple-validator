@@ -26,8 +26,8 @@ object Validators {
   )(using
       ev1: ActualType <:< FieldType,
       @implicitNotFound(
-        "Field.computed is supported for product types only, but ${Source} is not a product type."
+        "Field validator is supported for product types only, but ${Source} is not a product type."
       )
       ev2: Mirror.ProductOf[Source]
-  ): BuilderConfig[Source] = throw NotQuotedException("Field.computed")
+  ): BuilderConfig[Source] = throw NotQuotedException("Field validator")
 }

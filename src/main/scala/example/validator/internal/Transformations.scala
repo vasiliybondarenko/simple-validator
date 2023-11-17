@@ -64,8 +64,7 @@ object Transformations {
           val allErrors = validators.zip(elems).zip(fieldNames).map { case ((validator, elem), fieldName) =>
             enrichErrorMessage(fieldName)(validator.asInstanceOf[Validator[Any]].validate(elem))
           }
-          //todo: think about generalizing error type NonEmptyChain,
-          // not depending on Validated
+
           val combinedErrors =
             SemigroupK[NonEmptyChain].combineAllOptionK(allErrors.collect {
               case Invalid(e) => e
@@ -100,7 +99,7 @@ object Transformations {
   )(using
       Quotes,
       Fields.Source
-  ): List[MaterializedConfiguration.Product.Computed] = {
+  ): List[MaterializedConfiguration.Product.FieldValidator] = {
     import MaterializedConfiguration.Product.*
 
     config match
@@ -111,7 +110,7 @@ object Transformations {
             )(using $ev1, $ev2)
           } =>
         val name = Selectors.fieldName(Fields.source, selector)
-        Computed(name, validator.asInstanceOf[Expr[Validator[Any]]])(
+        FieldValidator(name, validator.asInstanceOf[Expr[Validator[Any]]])(
           Pos.fromExpr(config)
         ) :: Nil
 
@@ -124,7 +123,7 @@ object Transformations {
 
   object MaterializedConfiguration {
     enum Product extends MaterializedConfiguration {
-      case Computed(fieldName: String, validator: Expr[Validator[Any]])(
+      case FieldValidator(fieldName: String, validator: Expr[Validator[Any]])(
           val pos: Pos
       )
     }
@@ -142,7 +141,7 @@ object Transformations {
       quotes.reflect.report.errorAndAbort(failure.render, failure.position)
 
     final case class UnsupportedConfig(config: Expr[Any]) extends Failure {
-      override def render(using Quotes): String = "Fucking error"
+      override def render(using Quotes): String = "Unsupported config error"
     }
 
     final case class MirrorMaterialization(

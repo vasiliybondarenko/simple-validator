@@ -2,7 +2,7 @@ package example.validator.internal
 
 import scala.quoted.*
 
-final class Field(val name: String, val tpe: Type[?], val default: Option[Expr[Any]]) {
+final class Field(val name: String, val tpe: Type[?]) {
 
 
   override def toString: String = s"Field($name)"
