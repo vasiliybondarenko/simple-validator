@@ -15,11 +15,7 @@ object ValidatorExample extends App {
     Validated.cond(x > 1000, x, NonEmptyChain.one("Diameter is too small"))
 
   case class Planet(planetName: String, diameter: Int, sType: String)
-
-  case class Star(planetName: String, diameter: Int, sType: String)
-
   
-
   val v: Validator[Planet] =
     validator[Planet].withValidators(
       withValidator(_.planetName, nonEmptyValidatorValidator("Name")),

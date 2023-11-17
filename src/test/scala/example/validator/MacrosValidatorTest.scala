@@ -23,8 +23,7 @@ class MacrosValidatorTest extends AnyFreeSpec with Matchers {
     Validated.cond(x > 1000, x, NonEmptyChain.one("{} is too small"))
 
   case class Planet(planetName: String, diameter: Int, sType: String)
-
-  case class Star(planetName: String, diameter: Int, sType: String)
+  
 
   def validator[A]: ValidatorBuilder[A] = ValidatorBuilder()
 
