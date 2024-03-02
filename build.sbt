@@ -1,11 +1,6 @@
 
 lazy val root = (project in file(".")).
   settings(
-    inThisBuild(List(
-      organization := "com.example",
-      scalaVersion := "3.5.0",
-      version      := "0.1.0-SNAPSHOT"
-    )),
     name := "validation-scala3",
     version := "0.1.0",
     scalaVersion := "3.3.0",
