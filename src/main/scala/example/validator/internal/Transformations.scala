@@ -35,7 +35,6 @@ object Transformations {
     given source: Fields.Source = Fields.Source.fromMirror(product)
 
 
-
     val defaultValidator: Expr[Validator[Any]] = '{ (x: Any) =>
       x.validNec[String]
     }
@@ -50,7 +49,7 @@ object Transformations {
       validatorsMap.applyOrElse(f.name, _ => defaultValidator)
     )
 
-    val tupleExpr = Expr.ofTupleFromSeq(orderedValidators.toSeq)
+    val tupleExpr = Expr.ofTupleFromSeq(orderedValidators)
 
     '{
       new Validator[Source] {
